@@ -16,7 +16,7 @@ function App() {
       isCompleted: false,
     },
     {
-      id: 1,
+      id: 3,
       title: "Ler",
       description: "Ler até 3 capitulos de um livro",
       isCompleted: false,
@@ -41,7 +41,7 @@ function App() {
         <h1 className="text-3xl text-slate-100 font-bold text-center">
           Gerenciador de Tarefas
         </h1>
-        <Tasks tasks={tasks} onTaskClick={onTaskClick} />
+        <Tasks tasks={tasks} onTaskClick = {onTaskClick} />
       </div>
     </div>
   );

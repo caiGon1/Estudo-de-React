@@ -10,10 +10,10 @@ function Tasks(props) {
           <li key={tasks.id} className="flex gap-2">
             <button
               onClick={() => props.onTaskClick(tasks.id)}
-              className="bg-slate-400 text-left text-white p-2 rounded-md w-full"
+              className="bg-slate-400 text-left text-white p-2 rounded-md w-full pointer-events-auto cursor-pointer"
             >
               {tasks.title}
-              {tasks.isCopleted ? "COMPLETE" : "INCOMPLETE"}
+              {tasks.isCompleted ? "COMPLETE" : "INCOMPLETE"}
             </button>
             <button className="bg-slate-400 p-2 rounded-md text-white">
               <ChevronRightIcon />
