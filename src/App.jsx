@@ -1,5 +1,4 @@
 import { useState } from "react";
-import AddTasks from "./components/AddTasks";
 import Tasks from "./components/Tasks";
 
 function App() {
@@ -42,7 +41,6 @@ function App() {
         <h1 className="text-3xl text-slate-100 font-bold text-center">
           Gerenciador de Tarefas
         </h1>
-        <AddTasks />
         <Tasks tasks={tasks} onTaskClick={onTaskClick} />
       </div>
     </div>
