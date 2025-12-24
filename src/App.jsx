@@ -6,14 +6,31 @@ import Title from "./components/Title";
 
 
 function App() {
-  const [tasks, setTasks] = useState(
-    JSON.parse(localStorage.getItem("tasks") || [])
-  );
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem("tasks");
+    // Se existir algo no localStorage, transforma em objeto. 
+    // Se não, retorna um array vazio.
+    return savedTasks ? JSON.parse(savedTasks) : [];
+});
 
-  useEffect(() => {
+  useEffect(() => { 
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
+/*
+   useEffect(() => {
+    async function fetchTasks() {
+      const response = await fetch(
+      "https://jsonplaceholder.typicode.com/todos?_limit=10",
+        {
+          method: "GET",
+        });
+      const data = await response.json();
+      setTasks(data);
+    }
+    fetchTasks();
+  },[]);
+  */
 
   function onTaskClick(tasksId) {
     const newTasks = tasks.map((tasks) => {
