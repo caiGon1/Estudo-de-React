@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Input from "./input";
 
 
 
@@ -7,8 +8,17 @@ function AddTasks({ onAddTaskSubmit }) {
     const [description, setDescription] = useState();
     return (
         <div className="bg-slate-200 space-y-4 p-6 shadow rounded-md flex flex-col">
-            <input className="bg-white border border-slate-300 outline-slate-400 px-4 py-2  rounded-md" type="text" placeholder="Digite o título da tarefa" value={title} onChange={(events)=> setTitle(event.target.value)}></input>
-            <input className="bg-white border border-slate-300 outline-slate-400 px-4 py-2  rounded-md" type="text" placeholder="Digite a descrição da tarefa" value={description} onChange={(events)=> setDescription(event.target.value)}></input>
+            <Input
+                type="text"
+                placeholder="Digite o título da tarefa"
+                value={title}
+                onChange={(event)=> setTitle(event.target.value)} />
+            
+           <Input
+                type="text"
+                placeholder="Digite a descrição da tarefa"
+                value={description}
+                onChange={(event)=> setDescription(event.target.value)} />
             <button onClick={() => {
                 //verificar se está preenchido
                 if (!title.trim()|| !description.trim()) {

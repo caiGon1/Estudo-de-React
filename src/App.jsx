@@ -1,30 +1,33 @@
-import { useState } from "react";
-import {v4} from 'uuid'
+import { useEffect, useState } from "react";
+import { v4 } from "uuid";
 import Tasks from "./components/Tasks";
 import AddTasks from "./components/AddTasks";
+import Title from "./components/Title";
+
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Estudar",
-      description: "Estudar programação com foco em react",
-      isCompleted: false,
-    },
-    {
-      id: 2,
-      title: "Exercitar",
-      description: "Ir a academia",
-      isCompleted: false,
-    },
-    {
-      id: 3,
-      title: "Ler",
-      description: "Ler até 3 capitulos de um livro",
-      isCompleted: false,
-    },
-  ]);
+  const [tasks, setTasks] = useState(
+    JSON.parse(localStorage.getItem("tasks") || [])
+  );
 
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
+  /*
+  useEffect(() => {
+    async function fetchTasks() {
+      const response = await fetch(
+      "https://jsonplaceholder.typicode.com/todos?_limit=10",
+        {
+          method: "GET",
+        });
+      const data = await response.json();
+      setTasks(data);
+    }
+    fetchTasks();
+  },[]);
+  */
 
   function onTaskClick(tasksId) {
     const newTasks = tasks.map((tasks) => {
@@ -37,8 +40,8 @@ function App() {
     setTasks(newTasks);
   }
   function onTaskDelete(tasksId) {
-    const newTasks = tasks.filter(task => task.id != tasksId)
-    setTasks(newTasks)
+    const newTasks = tasks.filter((task) => task.id != tasksId);
+    setTasks(newTasks);
   }
 
   function onAddTaskSubmit(title, description) {
@@ -48,20 +51,15 @@ function App() {
       description,
       isCompleted: false,
     };
-    setTasks([...tasks, newTask])
+    setTasks([...tasks, newTask]);
   }
 
   //State
   return (
     <div className="w-screen h-screen bg-slate-500 flex justify-center p-6">
       <div className="w-125 space-y-4">
-        <h1 className="text-3xl text-slate-100 font-bold text-center">
-          Gerenciador de Tarefas
-        </h1>
-        <AddTasks
-          tasks={tasks}
-        onAddTaskSubmit = {onAddTaskSubmit}
-        />
+       <Title>Gerenciador de Tarefas</Title>
+        <AddTasks tasks={tasks} onAddTaskSubmit={onAddTaskSubmit} />
         <Tasks
           tasks={tasks}
           onTaskClick={onTaskClick}
